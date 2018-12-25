@@ -7,6 +7,7 @@ public class Snake {
     Node tail = null;
     int length = 0;
     UI ui = null;
+
     public Snake(UI ui) {
         this.ui = ui;
         Node initNode = new Node(20, 20, Direction.LEFT);
@@ -42,16 +43,16 @@ public class Snake {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 head.dir = Direction.LEFT;
                 break;
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 head.dir = Direction.UP;
                 break;
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 head.dir = Direction.RIGHT;
                 break;
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 head.dir = Direction.DOWN;
                 break;
         }

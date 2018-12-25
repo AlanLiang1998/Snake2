@@ -13,6 +13,7 @@ public class UI extends Frame {
 
     Snake s = new Snake(this);
     Image offScreenImage = null;
+    Egg e = new Egg(this);
 
     public void launch() {
         setTitle("贪吃蛇大战");
@@ -43,6 +44,7 @@ public class UI extends Frame {
     public void paint(Graphics g) {
         drawGrid(g);
         s.draw(g);
+        e.draw(g);
     }
 
     public void update(Graphics g) {
