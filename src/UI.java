@@ -9,6 +9,8 @@ public class UI extends Frame {
     public static final int WIDTH = COLS * BLOCK_SIZE;
     public static final int HEIGHT = ROWS * BLOCK_SIZE;
 
+    Snake s = new Snake(this);
+
     public void launch() {
         setTitle("贪吃蛇大战");
         setLocation(100, 100);
@@ -35,6 +37,7 @@ public class UI extends Frame {
 
     public void paint(Graphics g) {
         drawGrid(g);
+        s.draw(g);
     }
 
     public static void main(String[] args) {
