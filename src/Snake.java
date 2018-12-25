@@ -68,6 +68,7 @@ public class Snake {
         if (this.getRect().intersects(e.getRect())) {
             addToHead();
             e.refresh();
+            ui.setRank(ui.getRank() + 1);
         }
     }
 

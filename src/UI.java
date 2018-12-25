@@ -16,6 +16,15 @@ public class UI extends Frame {
     Egg e = new Egg(this);
     boolean gameOver = false;
     PaintThread pt = new PaintThread();
+    int rank = 1;
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
@@ -47,10 +56,22 @@ public class UI extends Frame {
         }
     }
 
+    public void drawGameOverFont(Graphics g) {
+        Color c = g.getColor();
+        Font f = g.getFont();
+        g.setColor(Color.RED);
+        g.setFont(new Font("华文彩云", Font.BOLD, 80));
+        g.drawString("GAME OVER", 210, 450);
+        g.setColor(c);
+        g.setFont(f);
+    }
+
     public void paint(Graphics g) {
         drawGrid(g);
-        if (gameOver)
+        if (gameOver) {
+            drawGameOverFont(g);
             pt.over();
+        }
         s.draw(g);
         e.draw(g);
         s.eat(e);
@@ -71,13 +92,14 @@ public class UI extends Frame {
 
     private class PaintThread implements Runnable {
         boolean running = true;
+        long repaintTime = 100;
 
         @Override
         public void run() {
             while (running) {
                 repaint();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(repaintTime - getRank());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
