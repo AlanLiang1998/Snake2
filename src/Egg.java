@@ -27,7 +27,13 @@ public class Egg {
     }
 
     public void refresh() {
-        row = rand.nextInt(UI.ROWS - 2) + 2;
-        col = rand.nextInt(UI.COLS - 2) + 2;
+        int row = rand.nextInt(UI.ROWS - 2) + 2;
+        int col = rand.nextInt(UI.COLS - 2) + 2;
+        while (ui.s.eggRecoverBody(row, col)) {
+            row = rand.nextInt(UI.ROWS - 2) + 2;
+            col = rand.nextInt(UI.COLS - 2) + 2;
+        }
+        this.row = row;
+        this.col = col;
     }
 }

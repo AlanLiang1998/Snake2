@@ -123,6 +123,15 @@ public class Snake {
         length--;
     }
 
+    public boolean eggRecoverBody(int row, int col) {
+        for (Node node = head; node != null; node = node.next) {
+            if (node.row == row && node.col == col) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private class Node {
         public static final int WIDTH = UI.BLOCK_SIZE;
         public static final int HEIGHT = UI.BLOCK_SIZE;
