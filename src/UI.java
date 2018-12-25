@@ -24,6 +24,19 @@ public class UI extends Frame {
         setVisible(true);
     }
 
+    public void drawGrid(Graphics g) {
+        for (int i = 1; i < ROWS; i++) {
+            g.drawLine(0, BLOCK_SIZE * i, WIDTH, BLOCK_SIZE * i);
+        }
+        for (int i = 1; i < COLS; i++) {
+            g.drawLine(BLOCK_SIZE * i, 0, BLOCK_SIZE * i, HEIGHT);
+        }
+    }
+
+    public void paint(Graphics g) {
+        drawGrid(g);
+    }
+
     public static void main(String[] args) {
         new UI().launch();
     }
