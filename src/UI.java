@@ -17,6 +17,8 @@ public class UI extends Frame {
     boolean gameOver = false;
     PaintThread pt = new PaintThread();
     int rank = 1;
+    int score = 0;
+    long startTime;
 
     public int getRank() {
         return rank;
@@ -26,8 +28,20 @@ public class UI extends Frame {
         this.rank = rank;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+    }
+
+    public void startGame() {
+        startTime = System.currentTimeMillis();
     }
 
     public void launch() {
@@ -44,6 +58,7 @@ public class UI extends Frame {
         });
         addKeyListener(new KeyMonitor());
         new Thread(pt).start();
+        startGame();
         setVisible(true);
     }
 
@@ -66,8 +81,26 @@ public class UI extends Frame {
         g.setFont(f);
     }
 
+    public long getGameTime() {
+        long gameTime = (System.currentTimeMillis() - startTime) / 1000;
+        return gameTime;
+    }
+
+    public void drawRecord(Graphics g) {
+        Color c = g.getColor();
+        Font f = g.getFont();
+        g.setColor(Color.RED);
+        g.setFont(new Font("华文彩云", Font.BOLD, 30));
+        g.drawString("score: " + score, 10, 60);
+        g.drawString("length: " + s.getLength(), 210, 60);
+        g.drawString("time: " + getGameTime(), 410, 60);
+        g.setColor(c);
+        g.setFont(f);
+    }
+
     public void paint(Graphics g) {
         drawGrid(g);
+        drawRecord(g);
         if (gameOver) {
             drawGameOverFont(g);
             pt.over();

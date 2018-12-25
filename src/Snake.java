@@ -16,6 +16,10 @@ public class Snake {
         length = 1;
     }
 
+    public int getLength() {
+        return length;
+    }
+
     public void draw(Graphics g) {
         move();
         for (Node node = head; node != null; node = node.next) {
@@ -69,6 +73,7 @@ public class Snake {
             addToHead();
             e.refresh();
             ui.setRank(ui.getRank() + 1);
+            ui.setScore(ui.getScore() + ui.getRank() * 3);
         }
     }
 
