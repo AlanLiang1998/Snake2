@@ -24,20 +24,8 @@ public class Snake {
     }
 
     public void move() {
-        switch (head.dir) {
-            case LEFT:
-                head.col--;
-                break;
-            case UP:
-                head.row--;
-                break;
-            case RIGHT:
-                head.col++;
-                break;
-            case DOWN:
-                head.row++;
-                break;
-        }
+        addToHead();
+        deleteTail();
     }
 
     public void keyPressed(KeyEvent e) {
@@ -64,8 +52,61 @@ public class Snake {
 
     public void eat(Egg e) {
         if (this.getRect().intersects(e.getRect())) {
+            addToHead();
             e.refresh();
         }
+    }
+
+    public void addToTail() {
+        Node newNode = null;
+        switch (tail.dir) {
+            case LEFT:
+                newNode = new Node(tail.row, tail.col + 1, tail.dir);
+                break;
+            case UP:
+                newNode = new Node(tail.row + 1, tail.col, tail.dir);
+                break;
+            case RIGHT:
+                newNode = new Node(tail.row, tail.col - 1, tail.dir);
+                break;
+            case DOWN:
+                newNode = new Node(tail.row - 1, tail.col, tail.dir);
+                break;
+        }
+        tail.next = newNode;
+        newNode.prev = tail;
+        tail = newNode;
+        length++;
+    }
+
+    public void addToHead() {
+        Node newNode = null;
+        switch (head.dir) {
+            case LEFT:
+                newNode = new Node(head.row, head.col - 1, head.dir);
+                break;
+            case UP:
+                newNode = new Node(head.row - 1, head.col, head.dir);
+                break;
+            case RIGHT:
+                newNode = new Node(head.row, head.col + 1, head.dir);
+                break;
+            case DOWN:
+                newNode = new Node(head.row + 1, head.col, head.dir);
+                break;
+        }
+        head.prev = newNode;
+        newNode.next = head;
+        head = newNode;
+        length++;
+    }
+
+    public void deleteTail() {
+        if (length <= 0)
+            return;
+        tail = tail.prev;
+        tail.next = null;
+        length--;
     }
 
     private class Node {
