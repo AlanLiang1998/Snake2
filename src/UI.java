@@ -14,6 +14,12 @@ public class UI extends Frame {
     Snake s = new Snake(this);
     Image offScreenImage = null;
     Egg e = new Egg(this);
+    boolean gameOver = false;
+    PaintThread pt = new PaintThread();
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
 
     public void launch() {
         setTitle("贪吃蛇大战");
@@ -28,7 +34,7 @@ public class UI extends Frame {
             }
         });
         addKeyListener(new KeyMonitor());
-        new Thread(new PaintThread()).start();
+        new Thread(pt).start();
         setVisible(true);
     }
 
@@ -43,6 +49,8 @@ public class UI extends Frame {
 
     public void paint(Graphics g) {
         drawGrid(g);
+        if (gameOver)
+            pt.over();
         s.draw(g);
         e.draw(g);
         s.eat(e);
@@ -62,10 +70,11 @@ public class UI extends Frame {
     }
 
     private class PaintThread implements Runnable {
+        boolean running = true;
 
         @Override
         public void run() {
-            while (true) {
+            while (running) {
                 repaint();
                 try {
                     Thread.sleep(100);
@@ -73,6 +82,10 @@ public class UI extends Frame {
                     e.printStackTrace();
                 }
             }
+        }
+
+        public void over() {
+            running = false;
         }
     }
 

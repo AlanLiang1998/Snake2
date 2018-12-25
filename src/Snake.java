@@ -24,6 +24,16 @@ public class Snake {
     }
 
     public void move() {
+        if (head.row < 2 || head.col < 0 || head.row >= UI.ROWS || head.col >= UI.COLS) {
+            ui.setGameOver(true);
+            return;
+        }
+        for (Node node = head.next; node != null; node = node.next) {
+            if (head.row == node.row && head.col == node.col) {
+                ui.setGameOver(true);
+                return;
+            }
+        }
         addToHead();
         deleteTail();
     }
