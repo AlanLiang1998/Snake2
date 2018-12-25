@@ -11,8 +11,8 @@ public class Egg {
 
     public Egg(UI ui) {
         this.ui = ui;
-        row = rand.nextInt(UI.ROWS);
-        col = rand.nextInt(UI.COLS);
+        row = rand.nextInt(UI.ROWS - 2) + 2;
+        col = rand.nextInt(UI.COLS - 2) + 2;
     }
 
     public void draw(Graphics g) {
@@ -27,7 +27,7 @@ public class Egg {
     }
 
     public void refresh() {
-        row = rand.nextInt(UI.ROWS);
-        col = rand.nextInt(UI.COLS);
+        row = rand.nextInt(UI.ROWS - 2) + 2;
+        col = rand.nextInt(UI.COLS - 2) + 2;
     }
 }
