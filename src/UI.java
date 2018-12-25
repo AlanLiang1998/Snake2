@@ -45,6 +45,7 @@ public class UI extends Frame {
         drawGrid(g);
         s.draw(g);
         e.draw(g);
+        s.eat(e);
     }
 
     public void update(Graphics g) {

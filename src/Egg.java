@@ -21,4 +21,13 @@ public class Egg {
         g.fillOval(col * WIDTH, row * HEIGHT, WIDTH, HEIGHT);
         g.setColor(c);
     }
+
+    public Rectangle getRect() {
+        return new Rectangle(col * WIDTH, row * HEIGHT, WIDTH, HEIGHT);
+    }
+
+    public void refresh() {
+        row = rand.nextInt(UI.ROWS);
+        col = rand.nextInt(UI.COLS);
+    }
 }

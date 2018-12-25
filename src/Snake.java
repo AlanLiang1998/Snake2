@@ -58,6 +58,16 @@ public class Snake {
         }
     }
 
+    public Rectangle getRect() {
+        return new Rectangle(head.col * Node.WIDTH, head.row * Node.HEIGHT, Node.WIDTH, Node.HEIGHT);
+    }
+
+    public void eat(Egg e) {
+        if (this.getRect().intersects(e.getRect())) {
+            e.refresh();
+        }
+    }
+
     private class Node {
         public static final int WIDTH = UI.BLOCK_SIZE;
         public static final int HEIGHT = UI.BLOCK_SIZE;
